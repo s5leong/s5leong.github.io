@@ -1,0 +1,10 @@
+repo/
+  index.html        <-- homepage
+  css/
+    style.css       <-- all styles
+  images/
+    base.png        <-- your main image
+    icon1.png       <-- normal icon
+    icon1-hover.png <-- hover image
+    icon2.png
+    icon2-hover.png
