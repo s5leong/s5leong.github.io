@@ -10,29 +10,26 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: #008080; /* classic teal desktop */
+  background: #008080; /* classic white desktop */
   font-family: monospace;
 }
 
-
-
 .desktop {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: var(--icon-spacing);
-  width: 100%;
+  position: relative;
+  width: 100vw;
   height: 100vh;
-  padding-top: 50px;
+  background-color: white;
+  overflow: hidden;
 }
 
 .icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
+  position: absolute;          /* THIS enables free movement */
+  cursor: grab;
+  user-select: none;
+}
+
+.icon:active {
+  cursor: grabbing;
 }
 
 /* Fixed container for images */
@@ -74,5 +71,12 @@ body, html {
   margin-top: var(--icon-label-gap);
   font-size: 1rem;
   text-align: center;
+  color: black; 
 }
-*/
+
+.center-icon {
+  grid-column: 3;   /* puts icon-4 in the 3rd slot */
+
+}
+
+

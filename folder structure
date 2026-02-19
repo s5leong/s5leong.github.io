@@ -7,6 +7,7 @@ s5leong.github.io/
 │   ├─ icon1-hover.png
 │   ├─ icon2.png
 │   ├─ icon2-hover.png
-│   └─ icon3.png
+│   ├─ icon3.png
+│   └─ icon3-hover.png
 └─ js/
     └─ icons.js
