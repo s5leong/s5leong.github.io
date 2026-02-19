@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://samantha-leong.com',
+  site: 'https://s5leong.github.io',
 });
