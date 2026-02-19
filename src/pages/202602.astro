@@ -1,4 +1,9 @@
 ---
+const bostonHead = "Boston, MA"
+const abstractText = "As next-generation sequencing (NGS) applications expand toward large-scale screening, existing library preparation workflows face significant scalability challenges. Conventional workflows rely on manual, plate-based processing that becomes labor-intensive and error-prone at scale. Although automation has been adopted, most high-throughput platforms simply scale plate-based reactions without miniaturization, leading to excessive reagent consumption. To address these challenges, we developed an automated nanoliter dispensing and imaging platform, the Shasta® Single Cell System, to enable either high-throughput single-cell or bulk library preparations at the nanoliter scale. The Shasta system utilizes positive-displacement nanosyringes that can reliably mix and multi-dispense cells and reagents from 25 to 100 nl. Samples, reagents, and barcodes are dispensed into a 5,184-nanowell chip for downstream reactions. For single-cell library preparation, we miniaturized the PicoPLEX® whole-genome-amplification (WGA) workflow 100-fold, from 30 µl to 300 nl per cell. We first dispensed a fluorescent-labeled cell suspension into the nanowell chip and scanned. Within 2.5 min, a convolutional neural network (CNN) image analysis model detected all the single cells. Each nanowell containing a single cell then underwent the WGA workflow through stacked 50 nl reagent dispenses for DNA extraction, pre-amplification, amplification PCR, and P5/P7 indexing. Using a dual-chip configuration, over 4,000 single-cell WGA libraries were generated in a single run. Genome coverage uniformity and mapping rates were comparable to plate-based methods, which are limited to only 96 or 384 libraries per run. To evaluate the copy number variation (CNV) detection sensitivity, two cell lines with well-characterized CNVs were processed: GM22601 (~25 Mb deletion on chromosome 4) and GM05067 (~45 Mb gain on chromosome 9). These segmental aneuploidies were reliably detected in >90% of cells at a read depth as low as ~100,000 reads per cell. For bulk library preparation, the Shasta system can process up to 384 samples with 12 replicates each. As a proof-of-principle, we dispensed 96 RNA samples with a wide concentration range of 1–50 ng per microliter. 35 nl of RNA was dispensed into each nanowell, followed by stacked reagent dispenses for reverse transcription, amplification PCR, tagmentation, and P5/P7 indexing. The total reaction volume of 285 nl per replicate is a ~300-fold reduction from standard plate-based mRNA-seq kits. With a shallow sequencing depth of ~120,000 reads per sample, we detected an average of ~7,000 genes, demonstrating comparable gene detection sensitivity with volume miniaturization. By combining miniaturization with automated dispensing and imaging, we achieved nanoliter-scale library preparation while maintaining the sensitivity of CNV detection for single-cell WGA and gene detection for bulk RNA-seq. The flexible, nanoliter-scale dispensing volume range of the Shasta system is expected to support future adaptation of a broad range of high-throughput NGS chemistries."
+
+const posterTitle1 = "Presented a poster at SLAS 2026. Four full days of socialising and learning about the current technological landscape was both exhausting and rejuvenating, and I am very much looking forward to the next conference!"
+const posterTitle2 = "Poster title: \"Automated single-cell and bulk NGS library preparation at the nanoliter scale maintains sensitivity while reducing reagent usage\" "
 ---
 
 <html lang="en">
@@ -12,19 +17,31 @@
     <main>
       <h1>2026 February <br> newsletter </h1>
 
-      <section class="visited">
-        <div class="visited-text">
-          <span class="label">visited</span>
-          <p>Boston</p>
-          <p>Poster presentation: Automated single-cell and bulk NGS library preparation at the nanoliter scale maintains sensitivity while reducing reagent usage</p>
-        </div>
-        <div class="visited-image">
-          <a href="https://www.slas.org" target="_blank">
-            <img src="/slas2026_banner.jpg" alt="SLAS 2026 conference" />
-          </a>
-        </div>
-      </section>
 
+  <!-- this part is for the first section "visited" -->
+
+<section class="visited">
+  <div class="visited-text">
+    <span class="label">visited</span>
+    <h2>{bostonHead}</h2>
+    <p>{posterTitle1}</p>
+    <p>{posterTitle2}</p>
+  </div>
+  <div class="visited-image">
+    <a href="https://www.slas.org" target="_blank" data-cursor="Visit the Society of Laboratory Automation and Screening">
+      <img src="/slas2026_banner.jpg" alt="SLAS 2026 conference" />
+    </a>
+  </div>
+</section>
+
+<div class="abstract">
+  <button class="abstract-toggle" id="abstractToggle">read abstract +</button>
+  <div class="abstract-content" id="abstractContent">
+    <p>{abstractText}</p>
+  </div>
+</div>
+
+<!-- this part is for the created | consumed | thinking -->
       <section class="columns">
         <div class="column">
           <span class="label">created</span>
@@ -37,15 +54,136 @@
         </div>
       </section>
     </main>
+
+    <div class="cursor" id="cursor">
+      <span class="cursor-text" id="cursor-text"></span>
+    </div>
+
+      <script>
+    const cursor = document.getElementById('cursor');
+    const cursorText = document.getElementById('cursor-text');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    const hoverElements = document.querySelectorAll('[data-cursor]');
+
+    hoverElements.forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        cursorText.textContent = el.getAttribute('data-cursor');
+        cursor.classList.add('expanded');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('expanded');
+        cursorText.textContent = '';
+      });
+    });
+
+    const toggle = document.getElementById('abstractToggle');
+    const content = document.getElementById('abstractContent');
+
+    toggle.addEventListener('click', () => {
+      content.classList.toggle('open');
+      toggle.textContent = content.classList.contains('open') ? 'close abstract -' : 'read abstract +';
+    });
+
+  </script>
+
   </body>
 </html>
 
 <style>
 
   @font-face {
-  font-family: 'Bianzhidai';
-  src: url('/font_bianzhidai/bianzhidai_COLR-GRAY.otf') format('opentype');
-}
+    font-family: 'Bianzhidai';
+    src: url('/font_bianzhidai/bianzhidai_COLR-GRAY.otf') format('opentype');
+  }
+
+
+  /*this section is for the black cursor that expands when hovering over a link*/
+    * {
+    cursor: none;
+  }
+
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    background: black;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s ease, height 0.5s ease, border-radius 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 9999;
+  }
+
+  .cursor.expanded {
+    width: 200px;
+    height: 44px;
+    border-radius: 44px;
+  }
+
+  .cursor-text {
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    text-align: center;
+    padding: 0 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
+    line-height: nowrap;
+  }
+
+  .cursor.expanded .cursor-text {
+    opacity: 1;
+  }
+
+/*this section is for the abstract expansion*/
+
+  .abstract-toggle {
+    background: none;
+    border: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: #888;
+    cursor: none;
+    padding: 0;
+    /*margin-top: 1rem;*/
+    display: block;
+  }
+
+  .abstract-toggle:hover {
+    color: #1a1a1a;
+  }
+
+  .abstract-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+
+  .abstract-content.open {
+    max-height: 1000px;
+  }
+
+  /*for abstract open/close */
+  .abstract {
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-top: -3rem;
+  }
+
 
   body {
     font-family: 'Space Grotesk', 'Noto Sans TC', sans-serif;    
@@ -56,13 +194,26 @@
   }
 
   h1 {
-    font-family: 'Bianzhidai','monospace;';
+    font-family: 'Bianzhidai',monospace;
     font-size: 3rem;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: none;
     margin-bottom: 3rem;
+    /*color: #CD1C18;*/
   }
+
+  h2 {
+    font-family: 'Bianzhidai',monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    margin-top: -0.5rem;
+    margin-bottom:0.5rem;
+
+  }
+
 
   .label {
     font-size: 2rem;
@@ -82,29 +233,48 @@
   }
 
   .visited-text {
-    flex: 1;
+    flex: 2;
   }
 
   .visited-text p {
     font-size: 0.9rem;
     line-height: 1.6;
     margin: 0;
+    margin-bottom: 0.75rem;
+
   }
 
   .visited-image {
-    flex: 2;
+    flex: 1.5;
   }
 
   .visited-image img {
     width: 100%;
     display: block;
-  }
+    }
 
   .columns {
     display: flex;
-    gap: 2rem;
-    border-top: 1px solid #ddd;
+    gap: 0;
+    /*border-top: 1px solid #ddd;*/
     padding-top: 2rem;
   }
 
   .column {
+    flex: 1;
+    padding: 0 2rem;
+    /*border-right: 1px solid #ddd;*/
+  }
+
+  .column:first-child {
+    padding-left: 0;
+  }
+
+  .column:last-child {
+    padding-right: 0;
+    border-right: none;
+  }
+
+
+
+</style>
