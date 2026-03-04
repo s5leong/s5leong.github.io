@@ -236,94 +236,86 @@ const consumed2 = "Most worn watch of the month."
 
   }
 
+.label {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: none;
+  display: block;
+  margin-bottom: 0.75rem;
+}
 
+.visited {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  align-items: flex-start;
+}
 
-  .label {
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: none;
-    /*color: #888;*/
-    display: block;
-    margin-bottom: 0.75rem;
-  }
+.visited-text {
+  flex: 2;
+}
 
-  .visited {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 4rem;
-    align-items: flex-start;
-  }
+.visited-text p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  margin-bottom: 0.75rem;
+}
 
-  .visited-text {
-    flex: 2;
-  }
+.visited-image {
+  flex: 1.5;
+}
 
-  .visited-text p {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 0;
-    margin-bottom: 0.75rem;
+.visited-image img {
+  width: 100%;
+  display: block;
+}
 
-  }
+.columns {
+  display: flex;
+  gap: 0;
+  padding-top: 2rem;
+}
 
-  .visited-image {
-    flex: 1.5;
-  }
+.column {
+  flex: 1;
+}
 
-  .visited-image img {
-    width: 100%;
-    display: block;
-    }
+.column:first-child {
+  padding-left: 0;
+}
 
-  .columns {
-    display: flex;
-    gap: 0;
-    /*border-top: 1px solid #ddd;*/
-    padding-top: 2rem;
-  }
+.column:last-child {
+  padding-right: 0;
+  border-right: none;
+}
 
-  .column {
-    flex: 1;
-    /*padding: 0 2rem;*/
-    /*border-right: 1px solid #ddd;*/
-  }
+.consumed-stack {
+  position: relative;
+  height: 300px;
+}
 
-  .column:first-child {
-    padding-left: 0;
-  }
+.consumed-img {
+  position: absolute;
+  height: 400px;
+  width: auto;
+  max-width: 100%;
+}
 
-  .column:last-child {
-    padding-right: 0;
-    border-right: none;
-  }
+.consumed-back {
+  top: -2px;
+  left: 45%;
+  z-index: 1;
+}
 
+.consumed-front {
+  top: 10px;
+  left: 0px;
+  z-index: 2;
+}
 
-  .consumed-stack {
-    position: relative;
-    height: 300px;
-  }
-
-  .consumed-img {
-    position: absolute;
-    height: 400px;
-    width: auto;
-  }
-
-  .consumed-back {
-    top: -2px;
-    left: 45%;
-    z-index: 1;
-  }
-
-  .consumed-front {
-    top: 10px;
-    left: 0 px;
-    z-index: 2;
-  }
-
-
-  .column a {
+.column a {
   color: #1a1a1a;
   text-decoration: none;
   font-size: 0.9rem;
@@ -336,6 +328,46 @@ const consumed2 = "Most worn watch of the month."
   border-bottom-color: #888;
 }
 
+@media (max-width: 768px) {
+  .visited {
+    flex-direction: column;
+  }
+
+  .visited-image {
+    width: 100%;
+  }
+
+  .columns {
+    flex-direction: column;
+  }
+
+  .column {
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 1.5rem 0;
+  }
+
+  .column:last-child {
+    border-bottom: none;
+  }
+
+  .consumed-stack {
+    height: 250px;
+    width: 100%;
+  }
+
+  .consumed-img {
+    height: 220px;
+  }
+
+  .consumed-back {
+    left: 40%;
+  }
+
+  .consumed-front {
+    left: 0px;
+  }
+}
 
 
 </style>
