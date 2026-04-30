@@ -1,0 +1,98 @@
+---
+const { items } = Astro.props;
+---
+<div class="image-grid">
+  {items.map((item, index) => (
+    <div class="image-item">
+      <img
+        src={item.image}
+        alt={item.alt || ""}
+        data-cursor={item.cursor}
+        class="grid-img"
+        style={item.height ? `height: ${item.height}; width: auto;` : ""}
+      />
+      <div class="grid-caption">
+        <span class="index">{(index + 1).toString().padStart(2, '0')}</span>
+        <span class="text">{item.cursor}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  /* MASONRY OPTION (Comment out the grid styles above and uncomment these to use)
+  .image-grid {
+    column-width: 150px;
+    column-gap: 1rem;
+    display: block;
+  }
+  .image-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+  .grid-img {
+    height: auto !important;
+  }
+  */
+
+  .image-item {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .grid-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .image-item:hover .grid-img {
+    transform: scale(1.1);
+  }
+
+  .grid-caption {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #1a1a1a;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    gap: 0.75rem;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .image-item:hover .grid-caption {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .grid-caption .index {
+    color: #888;
+    border-right: 1px solid #444;
+    padding-right: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    .image-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
