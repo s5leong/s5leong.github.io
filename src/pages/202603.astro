@@ -14,11 +14,8 @@ const meta = {
 const visited = {
   label: "visited",
   city: "Japan",
-  description1: ",
-  description2: "Your second paragraph, e.g. event title or details.",
-  image: "/your-banner.jpg",
-  imageAlt: "description of image",
-  imageLink: "https://your-link.com",
+  description1: "Japan F1, featuring sakura season.",
+  description2: "",
   imageCursor: "Your cursor hover text here",
   hasAbstract: false,
   abstractText: "",
@@ -31,19 +28,164 @@ const created = {
   imageCursor: "Your cursor hover text here",
 }
 
-// CONSUMED SECTION — two overlapping images
-const consumed = {
-  front: {
-    image: "/consumed1.png",
-    alt: "consumed 1",
-    cursor: "Your description for consumed 1",
+// CONSUMED SECTION — an array of images with captions
+const consumed = [
+  {
+    "image": "/202603/food/food1.jpg",
+    "alt": "Japan food 1",
+    "cursor": "dumplings"
   },
-  back: {
-    image: "/consumed2.png",
-    alt: "consumed 2",
-    cursor: "Your description for consumed 2",
+  {
+    "image": "/202603/food/food2.jpg",
+    "alt": "Japan food 2",
+    "cursor": "more dumplings"
   },
-}
+  {
+    "image": "/202603/food/food3.jpg",
+    "alt": "Japan food 3",
+    "cursor": "TAKASEGAWA seasonal bento: beautifully blanched bamboo shoots and beans, delicately flavoured salads, and tiny squids"
+  },
+  {
+    "image": "/202603/food/food4.jpg",
+    "alt": "Japan food 4",
+    "cursor": "TAKASEGAWA: sashimi" 
+  },
+  {
+    "image": "/202603/food/food5.jpg",
+    "alt": "Japan food 5",
+    "cursor": "TAKASEGAWA: charcoal grilled chicken"
+  },
+  {
+    "image": "/202603/food/food6.jpg",
+    "alt": "Japan food 6",
+    "cursor": "TAKASEGAWA: wagyu beef cutlet"
+  },
+  {
+    "image": "/202603/food/food7.jpg",
+    "alt": "Japan food 7",
+    "cursor": "TAKASEGAWA: sea bream chazuke"
+  },
+  {
+    "image": "/202603/food/food8.jpg",
+    "alt": "Japan food 8",
+    "cursor": "TAKASEGAWA: more chazuke"
+  },
+  {
+    "image": "/202603/food/food9.jpg",
+    "alt": "Japan food 9",
+    "cursor": "TAKASEGAWA: caramalized matcha cheesecake"
+  },
+  {
+    "image": "/202603/food/food10.jpg",
+    "alt": "Japan food 10",
+    "cursor": "oyster, uni, ikura"
+  },
+  {
+    "image": "/202603/food/food11.jpg",
+    "alt": "Japan food 11",
+    "cursor": "warabimochi set"
+  },
+  {
+    "image": "/202603/food/food12.jpg",
+    "alt": "Japan food 12",
+    "cursor": "Grace Note: a forgettable mocktail"
+  },
+  {
+    "image": "/202603/food/food13.jpg",
+    "alt": "Japan food 13",
+    "cursor": "原始炭燒 Hamaichi: very refreshing peppers & eggplants in vinegar"
+  },
+  {
+    "image": "/202603/food/food14.jpg",
+    "alt": "Japan food 14",
+    "cursor": "原始炭燒 Hamaichi: beef?"
+  },
+  {
+    "image": "/202603/food/food15.jpg",
+    "alt": "Japan food 15",
+    "cursor": "原始炭燒 Hamaichi: THIS FISH IS SO GOOD"
+  },
+  {
+    "image": "/202603/food/food16.jpg",
+    "alt": "Japan food 16",
+    "cursor": "原始炭燒 Hamaichi: grilled fish"
+  },
+  {
+    "image": "/202603/food/food17.jpg",
+    "alt": "Japan food 17",
+    "cursor": "原始炭燒 Hamaichi: 50 yen per yuzu slice"
+  },
+  {
+    "image": "/202603/food/food18.jpg",
+    "alt": "Japan food 18",
+    "cursor": "M stand cafe: sucker for anything pink, but this sakura latte was savoury and delightful, along with this sesame cheesecake."
+  },
+  {
+    "image": "/202603/food/food19.jpg",
+    "alt": "Japan food 19",
+    "cursor": "廻転鮨 銀座おのでら: uspcale revolving sushi; tuna set"
+  },
+  {
+    "image": "/202603/food/food20.jpg",
+    "alt": "Japan food 20",
+    "cursor": "廻転鮨 銀座おのでら: uni"
+  },
+  {
+    "image": "/202603/food/food21.jpg",
+    "alt": "Japan food 21",
+    "cursor": "廻転鮨 銀座おのでら: fresh otter shell"
+  },
+  {
+    "image": "/202603/food/food22.jpg",
+    "alt": "Japan food 22",
+    "cursor": "廻転鮨 銀座おのでら: snow crab meat and tomalley"
+  },
+  {
+    "image": "/202603/food/food23.jpg",
+    "alt": "Japan food 23",
+    "cursor": "廻転鮨 銀座おのでら: pickled mackerel"
+  },
+  {
+    "image": "/202603/food/food24.jpg",
+    "alt": "Japan food 24",
+    "cursor": "廻転鮨 銀座おのでら: fish soup!!!!!"
+  },
+  {
+    "image": "/202603/food/food25.jpg",
+    "alt": "Japan food 25",
+    "cursor": "廻転鮨 銀座おのでら:snow crab meat and tomalley, and ???"
+  },
+  {
+    "image": "/202603/food/food26.jpg",
+    "alt": "Japan food 26",
+    "cursor": "廻転鮨 銀座おのでら:"
+  },
+  {
+    "image": "/202603/food/food27.jpg",
+    "alt": "Japan food 27",
+    "cursor": "廻転鮨 銀座おのでら: steamed egg with crab and ikura"
+  },
+  {
+    "image": "/202603/food/food28.jpg",
+    "alt": "Japan food 28",
+    "cursor": "trench bar"
+  },
+  {
+    "image": "/202603/food/food29.jpg",
+    "alt": "Japan food 29",
+    "cursor": "MAMEYA: tempura"
+  },
+  {
+    "image": "/202603/food/food30.jpg",
+    "alt": "Japan food 30",
+    "cursor": "MAMEYA: udon with ise-ebi (5000 yen)"
+  },
+  {
+    "image": "/202603/food/food31.jpg",
+    "alt": "Japan food 31",
+    "cursor": "MAMEYA: close up of ise-ebi"
+  }
+]
 
 // THINKING SECTION
 const thinking = {
@@ -95,41 +237,21 @@ const thinking = {
         </div>
       )}
 
-      <!-- CREATED | CONSUMED | THINKING -->
-      <section class="columns">
-        <div class="column">
-          <span class="label">created</span>
-          <img
-            src={created.image}
-            alt={created.imageAlt}
-            data-cursor={created.imageCursor}
-            class="created-img"
-          />
-        </div>
-
-        <div class="column">
-          <span class="label">consumed</span>
-          <div class="consumed-stack">
-            <img
-              src={consumed.back.image}
-              alt={consumed.back.alt}
-              class="consumed-img consumed-back"
-              data-cursor={consumed.back.cursor}
-            />
-            <img
-              src={consumed.front.image}
-              alt={consumed.front.alt}
-              class="consumed-img consumed-front"
-              data-cursor={consumed.front.cursor}
-            />
-          </div>
-        </div>
-
-        <div class="column">
-          <span class="label">thinking</span>
-          <a href={thinking.linkUrl} target="_blank" data-cursor={thinking.linkCursor}>
-            {thinking.linkText}
-          </a>
+      <!-- CONSUMED SECTION -->
+      <section class="consumed-section">
+        <span class="label">consumed</span>
+        <p>Visual consumption with my Sony RX100VII.<p>
+        <div class="consumed-grid">
+          {consumed.map((item) => (
+            <div class="consumed-item">
+              <img
+                src={item.image}
+                alt={item.alt}
+                class="consumed-img"
+                data-cursor={item.cursor}
+              />
+            </div>
+          ))}
         </div>
       </section>
     </main>
@@ -199,20 +321,24 @@ const thinking = {
   }
 
   .cursor.expanded {
-    width: 200px;
-    height: 44px;
-    border-radius: 44px;
+    width: auto;
+    min-width: 200px;
+    max-width: 300px;
+    height: auto;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 22px;
   }
-
   .cursor-text {
     color: white;
     font-family: 'Space Mono', monospace;
     font-size: 0.65rem;
     text-align: center;
-    padding: 0 0.75rem;
+    padding: 0.8rem 1.25rem;
     opacity: 0;
     transition: opacity 0.3s ease 0.1s;
-    white-space: nowrap;
+    white-space: normal;
+    line-height: 1.4;
   }
 
   .cursor.expanded .cursor-text { opacity: 1; }
@@ -306,47 +432,52 @@ const thinking = {
     display: block;
   }
 
-  /* ---- COLUMNS ---- */
-  .columns {
-    display: flex;
-    gap: 0;
+  /* ---- CONSUMED SECTION ---- */
+  .consumed-section {
     padding-top: 2rem;
+    width: 100%;
   }
 
-  .column { flex: 1; }
-  .column:first-child { padding-left: 0; }
-  .column:last-child { padding-right: 0; border-right: none; }
-
-  /* ---- CREATED ---- */
-  .created-img {
-    height: 400px;
-    width: auto;
-    max-width: 100%;
+  .consumed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    align-items: start;
   }
 
-  /* ---- CONSUMED ---- */
-  .consumed-stack {
-    position: relative;
-    height: 300px;
+  /* MASONRY OPTION (Comment out the grid styles above and uncomment these to use)
+  .consumed-grid {
+    column-width: 150px;
+    column-gap: 1rem;
+    width: 100%;
+  }
+  .consumed-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .consumed-img {
+    height: auto;
+    aspect-ratio: auto;
+  }
+  */
+
+  .consumed-item {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 4px;
   }
 
   .consumed-img {
-    position: absolute;
-    height: 400px;
-    width: auto;
-    max-width: 100%;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
   }
 
-  .consumed-back {
-    top: 10px;
-    left: 35%;
-    z-index: 1;
-  }
-
-  .consumed-front {
-    top: 10px;
-    left: 0px;
-    z-index: 2;
+  .consumed-item:hover .consumed-img {
+    transform: scale(1.1);
   }
 
   /* ---- LINKS ---- */
@@ -370,25 +501,8 @@ const thinking = {
     .visited { flex-direction: column; }
     .visited-image { width: 100%; }
 
-    .columns { flex-direction: column; }
-
-    .column {
-      border-right: none;
-      border-bottom: 1px solid #ddd;
-      padding: 1.5rem 0;
-    }
-
-    .column:last-child { border-bottom: none; }
-
-    .consumed-stack {
-      height: 250px;
-      width: 100%;
-    }
-
-    .consumed-img { height: 220px; }
-    .consumed-back { left: 40%; }
-    .consumed-front { left: 0px; }
-
-    .created-img { height: 220px; }
+     .consumed-section { padding: 1.5rem 0; }
+     .consumed-grid { grid-template-columns: repeat(2, 1fr); } /* 2 columns on mobile */
+     /* .consumed-grid { column-count: 2; } */ /* Uncomment for masonry on mobile */
   }
 </style>

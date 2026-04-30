@@ -1,0 +1,339 @@
+---
+import ImageGrid from '../components/ImageGrid.astro';
+
+// ============================================================
+// EDIT THIS SECTION EACH MONTH
+// ============================================================
+
+const monthTitle = "202X Month"
+const monthSubtitle = "Newsletter"
+
+// VISITED SECTION
+const visited = {
+  label: "visited",
+  heading: "City, Country",
+  description1: "First line of description about your visit.",
+  description2: "Second line of description about your visit.",
+  image: "/placeholder-banner.jpg",
+  imageAlt: "Description of the image",
+  imageLink: "https://example.com",
+  imageCursor: "Hover text for the image"
+}
+
+// EXTRA DETAILS SECTION (Collapsible)
+const showDetails = true;
+const detailsButtonLabel = "read details";
+const detailsText = "This is where you can put an abstract, extra notes, or any longer text.";
+
+// COLUMNS SECTION - Now using arrays for flexibility
+const created = [
+  {
+    image: "/placeholder-created.png",
+    alt: "Created 1",
+    cursor: "Caption for created item",
+    height: "400px" // Optional height override
+  }
+]
+
+const consumed = [
+  {
+    image: "/placeholder-consumed1.png",
+    alt: "Consumed 1",
+    cursor: "Caption for consumed 1"
+  },
+  {
+    image: "/placeholder-consumed2.png",
+    alt: "Consumed 2",
+    cursor: "Caption for consumed 2"
+  }
+]
+
+const thinking = {
+  label: "thinking",
+  text: "I wrote something new here!",
+  link: "https://example.com",
+  linkCursor: "Read the full post"
+}
+
+// ============================================================
+// TEMPLATE LOGIC - NOTHING BELOW NEEDS TO BE EDITED
+// ============================================================
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{monthTitle}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+      <h1>{monthTitle} <br> {monthSubtitle} </h1>
+
+      <!-- VISITED SECTION -->
+      {visited && (
+        <section class="visited">
+          <div class="visited-text">
+            <span class="label">{visited.label}</span>
+            <h2>{visited.heading}</h2>
+            <p>{visited.description1}</p>
+            <p>{visited.description2}</p>
+          </div>
+          <div class="visited-image">
+            <a href={visited.imageLink} target="_blank" data-cursor={visited.imageCursor}>
+              <img src={visited.image} alt={visited.imageAlt} />
+            </a>
+          </div>
+        </section>
+      )}
+
+      <!-- COLLAPSIBLE DETAILS -->
+      {showDetails && (
+        <div class="details-section">
+          <button class="details-toggle" id="detailsToggle">{detailsButtonLabel} +</button>
+          <div class="details-content" id="detailsContent">
+            <p>{detailsText}</p>
+          </div>
+        </div>
+      )}
+
+      <!-- CREATED | CONSUMED | THINKING -->
+      <section class="columns">
+        <div class="column">
+          <span class="label">created</span>
+          <ImageGrid items={created} />
+        </div>
+
+        <div class="column">
+          <span class="label">consumed</span>
+          <ImageGrid items={consumed} />
+        </div>
+
+        <div class="column">
+          <span class="label">thinking</span>
+          <a href={thinking.link} target="_blank" data-cursor={thinking.linkCursor}>{thinking.text}</a>
+        </div>
+      </section>
+    </main>
+
+    <div class="cursor" id="cursor">
+      <span class="cursor-text" id="cursor-text"></span>
+    </div>
+
+    <script>
+      const cursor = document.getElementById('cursor');
+      const cursorText = document.getElementById('cursor-text');
+
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+
+      const hoverElements = document.querySelectorAll('[data-cursor]');
+      hoverElements.forEach((el) => {
+        el.addEventListener('mouseenter', () => {
+          cursorText.textContent = el.getAttribute('data-cursor');
+          cursor.classList.add('expanded');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.classList.remove('expanded');
+          cursorText.textContent = '';
+        });
+      });
+
+      const toggle = document.getElementById('detailsToggle');
+      const content = document.getElementById('detailsContent');
+      if (toggle && content) {
+        toggle.addEventListener('click', () => {
+          content.classList.toggle('open');
+          const isOpened = content.classList.contains('open');
+          if (isOpened) {
+            toggle.textContent = toggle.textContent.replace('read', 'close').replace('+', '-');
+          } else {
+            toggle.textContent = toggle.textContent.replace('close', 'read').replace('-', '+');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: 'Bianzhidai';
+    src: url('/font_bianzhidai/bianzhidai_COLR-GRAY.otf') format('opentype');
+  }
+
+  /* ---- CURSOR ---- */
+  * { cursor: none; }
+
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    background: black;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s ease, height 0.5s ease, border-radius 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 9999;
+  }
+
+  .cursor.expanded {
+    width: 200px;
+    height: auto;
+    min-height: 25px;
+    border-radius: 25px;
+    padding: 8px 0;
+  }
+
+  .cursor-text {
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-align: center;
+    padding: 0 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
+    white-space: normal;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+
+  .cursor.expanded .cursor-text { opacity: 1; }
+
+  /* ---- DETAILS SECTION ---- */
+  .details-toggle {
+    background: none;
+    border: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: #888;
+    cursor: none;
+    padding: 0;
+    display: block;
+  }
+
+  .details-toggle:hover { color: #1a1a1a; }
+
+  .details-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .details-content.open { max-height: 10000px; }
+
+  .details-section {
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-top: -3rem;
+  }
+
+  /* ---- BASE ---- */
+  body {
+    font-family: 'Space Grotesk', 'Noto Sans TC', sans-serif;
+    background-color: #f5f0eb;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 2rem 3rem;
+  }
+
+  h1 {
+    font-family: 'Bianzhidai', monospace;
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-family: 'Bianzhidai', monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .label {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ---- VISITED ---- */
+  .visited {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    align-items: flex-start;
+  }
+
+  .visited-text { flex: 2; }
+
+  .visited-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .visited-image { flex: 1.5; }
+
+  .visited-image img {
+    width: 100%;
+    display: block;
+  }
+
+  /* ---- COLUMNS ---- */
+  .columns {
+    display: flex;
+    gap: 2rem;
+    padding-top: 2rem;
+  }
+
+  .column { flex: 1; }
+
+  /* ---- LINKS ---- */
+  .column a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 0.1rem;
+  }
+
+  .column a:hover {
+    color: #888;
+    border-bottom-color: #888;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    body { padding: 1.5rem; }
+
+    .visited { flex-direction: column; }
+    .visited-image { width: 100%; }
+
+    .columns { flex-direction: column; }
+
+    .column {
+      border-bottom: 1px solid #ddd;
+      padding: 1.5rem 0;
+    }
+
+    .column:last-child { border-bottom: none; }
+  }
+</style>
