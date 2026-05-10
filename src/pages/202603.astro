@@ -14,18 +14,79 @@ const meta = {
 const visited = {
   label: "visited",
   city: "Japan",
-  description1: "Japan F1, featuring sakura season.",
+  description1: "Just in time for F1 x sakura season!",
   description2: "",
   imageCursor: "Your cursor hover text here",
-  hasAbstract: false,
-  abstractText: "",
+  hasPost: true,
+  postBlocks: [
+    {
+      type: "paragraph",
+      text: "This trip, as all last-minute trips are wont to be, came at a really busy time in our professional lives. This meant that we both had our laptops in arms reach throughout our flight and trains, ready to seize the chance of stable wifi. After landing, we immediately took a Shinkansen and then Kintetsu to Mie Prefecture.",
+    },
+    {
+      type: "image",
+      src: "/202603/japan-train.png",
+      alt: "Japan train",
+      caption: "We traversed quite a long distance in one day to get closer to Suzuka Circuit for F1.",
+    },
+    {
+      type: "paragraph",
+      text: "Unfortunately, there was a slight delay at the Tokyo station due to \"flying debris\", which I assumed to be a suicide attempt. The 15-minute delay unfortunately led us to miss the rest of our connections, but we snagged the last Kintetsu train. Once we arrived in Iseshi, I finally stowed my laptop away, tethered to my unreliable unlimited hotspot. We spent a day eating Ise-ebi (gigantic shrimp) and Matsusaka beef, and the next day at the Suzuka Circuit, where fans were very subded for two reasons: Yuki Tsunoda was no longer racing for Red Bull, and Honda x Aston Martin partnership showed subpar performance. Overall, I would recommend Japan F1 season because of the ease of travel if not the price.",
+    },
+    {
+      type: "paragraph",
+      text: "After the race was over, we spent a couple days in Kyoto, looking at sakura and eating our way through town. I was concerned that all the sakura would be blown away from the wind and rain, but I was availed of my concerns and was able to take many photos of my Grand Seiko Hanami amongst all the sakura. As for the mocktail scene in Japan, I must say that they were not as creative as their cocktails, and could/would not produce anything that strayed away from their menus. Granted, my sample size of 3 was not representative of the mocktail scene, however I would expect a lot more from those in the list for The World's 50 Best Bars."
+    },
+    {type: "paragraph",
+      text: "Finally, I am really proud to report that I am now a pro at packing light for international trips: no suitcases, just one backpack and a zip tote bag. I was rather tired of my outfits after a week, but it was worth not having to drag heavy cases up and down staircases, especially as we took multiple trains around the country.",
+    },
+  ],
+}
+
+const coolThings = {
+  label: "cool things",
+  title: "in no particular order",
+  items: [
+    {
+      image: "/202603/nippon-steel.HEIC",
+      alt: "Nippon Steel knuckle coupler gacha",
+      caption: "Nippon Steel knuckle coupler gacha",
+    },
+    {
+      image: "/202603/ferrari.jpeg",
+      alt: "ferrari",
+      caption: "Dedication to the Lewis brand!",
+    },
+    {
+      image: "/202603/worldfreecoffee.HEIC",
+      alt: "world free coffee",
+      caption: "Met these delightful folks sharing free coffee in this random market in Ise.",
+    },
+    {image: "/202603/parrot.jpeg",
+          alt: "bird",
+          caption: "Held two conures in Maruyama Park after proving I was a responsible bird owner."
+    },
+    {image: "/202603/soup.HEIC",
+          alt: "soup discard at Suzuka ",
+          caption: "Soup discard solution at Suzuka Circuit. Great sichuan dan-dan noodles at the track."},
+    {image: "/202603/shooting.jpeg",
+            alt: "shootingbar",
+            caption: "A Lamborghini ad for a shooting bar in Kyoto, of all places. Guns and beer: Americana at its finest."},
+    {image: "/202603/rico.jpeg",
+            alt: "rico",
+            caption: "Ricoland Kyoto: motorcycle gear for Asian women! I bought a light blue jacket with embroided flowers on the sleeves and a pair of trousers."},
+
+    {image: "/202603/iseebi.jpeg",
+    alt: "iseebi",
+    caption: "Super cute ise-ebi handkerchief that I should have bought to dry my hands after washing."},
+    ],
 }
 
 // CREATED SECTION
 const created = {
   image: "/created.png",
   imageAlt: "created",
-  imageCursor: "Your cursor hover text here",
+  imageCursor: "Your cursor hover text here"
 }
 
 // CONSUMED SECTION — an array of images with captions
@@ -232,6 +293,9 @@ const consumed = [
   }
 ]
 
+const visibleConsumed = consumed.slice(0, 8)
+const hiddenConsumed = consumed.slice(8)
+
 // THINKING SECTION
 const thinking = {
   linkText: "Your thinking piece title here",
@@ -264,30 +328,53 @@ const thinking = {
             <p>{visited.description1}</p>
             <p>{visited.description2}</p>
           </div>
-          <div class="visited-image">
-            <a href={visited.imageLink} target="_blank" data-cursor={visited.imageCursor}>
-              <img src={visited.image} alt={visited.imageAlt} />
-            </a>
-          </div>
         </section>
       )}
 
-      <!-- ABSTRACT (optional) -->
-      {visited?.hasAbstract && (
-        <div class="abstract">
-          <button class="abstract-toggle" id="abstractToggle">read abstract +</button>
-          <div class="abstract-content" id="abstractContent">
-            <p>{visited.abstractText}</p>
-          </div>
+      <!-- POST (optional) -->
+      {visited?.hasPost && (
+        <div class="post">
+          <button class="abstract-toggle" id="abstractToggle">expand ramblings +</button>
+          <article class="post-content abstract-content" id="abstractContent">
+            {visited.postBlocks.map((block) => (
+              <>
+                {block.type === "paragraph" && <p>{block.text}</p>}
+
+                {block.type === "image" && (
+                  <figure>
+                    <img src={block.src} alt={block.alt} />
+                    {block.caption && <figcaption>{block.caption}</figcaption>}
+                  </figure>
+                )}
+
+              </>
+            ))}
+          </article>
         </div>
+      )}
+
+      <!-- COOL THINGS SECTION -->
+      {coolThings && (
+        <section class="cool-things-section">
+          <span class="label">{coolThings.label}</span>
+          <p>{coolThings.title}</p>
+          <div class="cool-things-row">
+            {coolThings.items.map((item) => (
+              <figure class="cool-thing">
+                <img src={item.image} alt={item.alt} />
+                <figcaption>{item.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
       )}
 
       <!-- CONSUMED SECTION -->
       <section class="consumed-section">
         <span class="label">consumed</span>
-        <p>Visual consumption with my Sony RX100VII.<p>
+        <p>A whole section to enjoy visual consumption with Sony RX100VII.</p>
         <div class="consumed-grid">
-          {consumed.map((item) => (
+          {visibleConsumed.map((item) => (
             <div class="consumed-item">
               <img
                 src={item.image}
@@ -298,6 +385,26 @@ const thinking = {
             </div>
           ))}
         </div>
+        {hiddenConsumed.length > 0 && (
+          <details class="  consumed-more">
+            <summary>
+              <span class="summary-base">see more?</span>
+              <span class="summary-expanded" aria-hidden="true">hide me</span>
+            </summary>
+            <div class="consumed-grid consumed-grid-more">
+              {hiddenConsumed.map((item) => (
+                <div class="consumed-item">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    class="consumed-img"
+                    data-cursor={item.cursor}
+                  />
+                </div>
+              ))}
+            </div>
+          </details>
+        )}
       </section>
     </main>
 
@@ -331,8 +438,17 @@ const thinking = {
       if (toggle && content) {
         toggle.addEventListener('click', () => {
           content.classList.toggle('open');
-          toggle.textContent = content.classList.contains('open') ? 'close abstract -' : 'read abstract +';
+          toggle.textContent = content.classList.contains('open') ? 'close -' : 'read more +';
         });
+      }
+
+      const moreDetails = document.querySelector('.consumed-more');
+      if (moreDetails) {
+        const syncMoreLabel = () => {
+          moreDetails.dataset.open = moreDetails.open ? 'true' : 'false';
+        };
+        syncMoreLabel();
+        moreDetails.addEventListener('toggle', syncMoreLabel);
       }
     </script>
   </body>
@@ -388,7 +504,7 @@ const thinking = {
 
   .cursor.expanded .cursor-text { opacity: 1; }
 
-  /* ---- ABSTRACT ---- */
+  /* ---- POST ---- */
   .abstract-toggle {
     background: none;
     border: none;
@@ -413,10 +529,74 @@ const thinking = {
 
   .abstract-content.open { max-height: 10000px; }
 
-  .abstract {
+  .post-content {
+    max-width: 70ch;
+  }
+
+  .post-content p {
+    margin: 1rem 0;
+  }
+
+  .post-content figure {
+    margin: 1.5rem 0;
+  }
+
+  .post-content img {
+    width: 70%;
+    max-width: 70%;
+    height: auto;
+    display: block;
+  }
+
+  .post-content figcaption {
+    margin-top: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: #777;
+  }
+
+  .post {
     width: 100%;
     margin-bottom: 2rem;
     margin-top: -3rem;
+  }
+
+  /* ---- COOL THINGS ---- */
+  .cool-things-section {
+    margin: 2.5rem 0 4rem;
+    width: 100%;
+  }
+
+  .cool-things-section > p {
+    margin: 0 0 1rem;
+  }
+
+  .cool-things-row {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .cool-thing {
+    flex: 0 0 clamp(150px, 22vw, 240px);
+    margin: 0;
+  }
+
+  .cool-thing img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .cool-thing figcaption {
+    margin-top: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: #1a1a1a;
   }
 
   /* ---- BASE ---- */
@@ -485,9 +665,73 @@ const thinking = {
 
   .consumed-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
     align-items: start;
+  }
+
+  .consumed-more {
+    margin-top: 1.25rem;
+  }
+
+  .consumed-more summary {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 0.1rem;
+    list-style: none;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .consumed-more summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .consumed-more summary:hover {
+    color: #888;
+    border-bottom-color: #888;
+  }
+
+  .summary-base,
+  .summary-expanded {
+    display: inline-block;
+    transition: transform 0.38s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.28s ease, max-width 0.38s cubic-bezier(0.2, 1, 0.3, 1);
+    transform-origin: left center;
+  }
+
+  .summary-base {
+    max-width: 10rem;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .summary-expanded {
+    max-width: 0;
+    opacity: 0;
+    transform: scaleX(0.7);
+    margin-left: 0;
+  }
+
+  .consumed-more[open] .summary-base {
+    max-width: 0;
+    opacity: 0;
+    transform: scaleX(0.7);
+  }
+
+  .consumed-more[open] .summary-expanded {
+    max-width: 16rem;
+    opacity: 1;
+    transform: scaleX(1);
+    margin-left: 0.35rem;
+  }
+
+  .consumed-grid-more {
+    margin-top: 1rem;
   }
 
   /* MASONRY OPTION (Comment out the grid styles above and uncomment these to use)
@@ -549,5 +793,10 @@ const thinking = {
      .consumed-section { padding: 1.5rem 0; }
      .consumed-grid { grid-template-columns: repeat(2, 1fr); } /* 2 columns on mobile */
      /* .consumed-grid { column-count: 2; } */ /* Uncomment for masonry on mobile */
+
+     .post-content img {
+       width: 100%;
+       max-width: 100%;
+     }
   }
 </style>
